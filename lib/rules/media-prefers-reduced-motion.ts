@@ -2,7 +2,7 @@ import stylelint, { type Rule } from "stylelint";
 
 const {
   createPlugin,
-  utils: { report, ruleMessages, validateOptions },
+  utils: { ruleMessages, validateOptions },
 } = stylelint;
 
 const ruleName = "a11y-contemporary/media-prefers-reduced-motion";
