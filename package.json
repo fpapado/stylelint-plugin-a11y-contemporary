@@ -1,0 +1,63 @@
+{
+  "name": "stylelint-plugin-a11y-contemporary",
+  "version": "2500.0.0",
+  "description": "Stylelint plugin for better accessibility, contemporary to codebases written in 2025 and beyond.",
+  "keywords": [
+    "stylelint",
+    "stylelint-plugin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fpapado/stylelint-plugin-a11y-contemporary.git"
+  },
+  "license": "MIT",
+  "author": "Fotis Papadogeorgopoulos",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "files": [
+    "dist",
+    "docs"
+  ],
+  "scripts": {
+    "build": "npm-run-all build:lib",
+    "build:lib": "tshy lib/index.ts",
+    "check-types": "tsc --noEmit",
+    "check-types:watch": "tsc --noEmit --watch",
+    "lint": "npm-run-all \"lint:*\"",
+    "lint:prettier": "pnpm prettier --check .",
+    "lint:scripts": "eslint lib",
+    "prepublishOnly": "pnpm build && publint && attw --pack",
+    "publint": "publint",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "postcss": "8.5.1"
+  },
+  "devDependencies": {
+    "@tsconfig/node22": "22.0.0",
+    "@types/node": "22.13.1",
+    "dedent": "1.5.3",
+    "prettier": "3.5.0",
+    "prettier-plugin-packagejson": "2.5.8",
+    "stylelint": "16.14.1",
+    "typescript": "5.7.3",
+    "vitest": "3.0.5",
+    "vitest-stylelint-utils": "^1.1.0"
+  },
+  "peerDependencies": {
+    "stylelint": "^16.0.0"
+  },
+  "packageManager": "pnpm@9.15.5+sha512.845196026aab1cc3f098a0474b64dfbab2afe7a1b4e91dd86895d8e4aa32a7a6d03049e2d0ad770bbe4de023a7122fb68c1a1d6e0d033c7076085f9d5d4800d4",
+  "engines": {
+    "node": "^20 || ^22"
+  },
+  "publishConfig": {}
+}
