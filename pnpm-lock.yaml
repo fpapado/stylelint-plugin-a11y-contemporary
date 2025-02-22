@@ -27,6 +27,9 @@ importers:
       '@types/node':
         specifier: 22.13.5
         version: 22.13.5
+      '@vitest/eslint-plugin':
+        specifier: 1.1.32-beta.1
+        version: 1.1.32-beta.1(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3)(vitest@3.0.6(@types/node@22.13.5)(jiti@2.4.2))
       dedent:
         specifier: 1.5.3
         version: 1.5.3
@@ -512,6 +515,18 @@ packages:
   '@typescript-eslint/visitor-keys@8.24.1':
     resolution: {integrity: sha512-EwVHlp5l+2vp8CoqJm9KikPZgi3gbdZAtabKT9KPShGeOcJhsv4Zdo3oc8T8I0uKEmYoU4ItyxbptjF08enaxg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@vitest/eslint-plugin@1.1.32-beta.1':
+    resolution: {integrity: sha512-U0OWYco/g+y+AtyOWBrFYCBUreDG4aFYh+4FiSHB0kI3KXQ5/ytf7UCfPwMfewQjhBYJpfQ0uphKy5x3ItLqVA==}
+    peerDependencies:
+      eslint: '>= 8.57.0'
+      typescript: '>= 5.0.0'
+      vitest: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+      vitest:
+        optional: true
 
   '@vitest/expect@3.0.6':
     resolution: {integrity: sha512-zBduHf/ja7/QRX4HdP1DSq5XrPgdN+jzLOwaTq/0qZjYfgETNFCKf9nOAp2j3hmom3oTbczuUzrzg9Hafh7hNg==}
@@ -1953,6 +1968,13 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.24.1
       eslint-visitor-keys: 4.2.0
+
+  '@vitest/eslint-plugin@1.1.32-beta.1(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3)(vitest@3.0.6(@types/node@22.13.5)(jiti@2.4.2))':
+    dependencies:
+      eslint: 9.21.0(jiti@2.4.2)
+    optionalDependencies:
+      typescript: 5.7.3
+      vitest: 3.0.6(@types/node@22.13.5)(jiti@2.4.2)
 
   '@vitest/expect@3.0.6':
     dependencies:

@@ -44,6 +44,7 @@
     "@tsconfig/node22": "22.0.0",
     "@tsconfig/strictest": "2.0.5",
     "@types/node": "22.13.5",
+    "@vitest/eslint-plugin": "1.1.32-beta.1",
     "dedent": "1.5.3",
     "eslint": "9.21.0",
     "jiti": "2.4.2",

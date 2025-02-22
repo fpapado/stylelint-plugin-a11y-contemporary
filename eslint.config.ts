@@ -1,4 +1,5 @@
 import eslint from "@eslint/js";
+import vitest from "@vitest/eslint-plugin";
 import tseslint, { type ConfigArray } from "typescript-eslint";
 
 const config: ConfigArray = tseslint.config(
@@ -28,6 +29,17 @@ const config: ConfigArray = tseslint.config(
           ignoreRestSiblings: true,
         },
       ],
+    },
+  },
+  {
+    files: ["src/**/*.spec.ts"], // or any other pattern
+    plugins: {
+      vitest,
+    },
+    rules: {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      ...vitest.configs!.recommended.rules,
+      "vitest/max-nested-describe": ["error", { max: 3 }],
     },
   },
 );
