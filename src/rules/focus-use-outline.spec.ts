@@ -38,6 +38,21 @@ testRule({
     {
       code: "a { :focus { outline: 2px solid blue; box-shadow: 0 0 0 2px red; }}",
     },
+    {
+      code: `
+        :focus { 
+          box-shadow: none; 
+          box-shadow: auto; 
+          box-shadow: initial; 
+          box-shadow: inherit; 
+          box-shadow: revert; 
+          box-shadow: revert-layer; 
+          box-shadow: unset; 
+        }`,
+    },
+    {
+      code: ":focus { box-shadow: auto; }",
+    },
   ],
 
   reject: [

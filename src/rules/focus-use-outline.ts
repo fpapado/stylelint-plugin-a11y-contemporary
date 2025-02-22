@@ -14,8 +14,21 @@ export const messages = ruleMessages(ruleName, {
 });
 
 const meta = {
+  fixable: true,
   url: "https://github.com/fpapado/stylelint-plugin-a11y-contemporary/blob/main/README.md",
 };
+
+// @see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Values_and_Units/CSS_data_types#css-wide_keywords
+const cssKeywords = new Set([
+  "auto",
+  "initial",
+  "inherit",
+  "revert",
+  "revert-layer",
+  "unset",
+]);
+
+const noneValue = "none";
 
 function hasOutlineSibling(decl: Declaration): boolean {
   let found = false;
@@ -42,12 +55,22 @@ const ruleFunction: Rule = (primary) => {
     root.walkRules((rule) => {
       if (rule.selector.includes(":focus")) {
         rule.walkDecls((decl) => {
-          if (decl.prop === "box-shadow" && !hasOutlineSibling(decl)) {
+          if (
+            decl.prop === "box-shadow" &&
+            decl.value !== noneValue &&
+            !cssKeywords.has(decl.value) &&
+            !hasOutlineSibling(decl)
+          ) {
+            const fix = () => {
+              // TODO: parse box-shadow for the fix
+            };
+
             report({
               ruleName,
               message: messages.noBoxShadow,
               node: decl,
               result,
+              fix,
             });
           }
         });
