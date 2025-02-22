@@ -31,7 +31,7 @@
     "check-types:watch": "tsc --noEmit --watch",
     "format": "pnpm prettier --write .",
     "lint": "npm-run-all \"lint:*\"",
-    "lint:md": "pnpm ",
+    "lint:md": "pnpm markdownlint-cli2",
     "lint:prettier": "pnpm prettier --check .",
     "lint:scripts": "eslint",
     "prepublishOnly": "pnpm build && publint && attw --pack",
