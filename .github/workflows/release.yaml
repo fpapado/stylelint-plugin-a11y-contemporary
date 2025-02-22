@@ -17,7 +17,7 @@ jobs:
       pull-requests: write # to create a release pull request (changesets/action)
       contents: write # to create the release itself (changesets/action)
       id-token: write # OpenID Connect token needed for npm publish provenance
-      packages: write # to publish to GitHub package registr
+      packages: write # to publish to GitHub package registry
     name: Release
     runs-on: ubuntu-latest
     steps:
@@ -44,7 +44,8 @@ jobs:
           # the box. @see: https://github.com/changesets/changesets/issues/238
           publish: pnpm changeset:release
         env:
+          # Used to write releases and create the PR
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
-          # set as a repository secret
+          # Set as a repository secret, publishes to npm
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
