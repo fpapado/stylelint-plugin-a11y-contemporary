@@ -34,7 +34,7 @@
     "lint:md": "pnpm markdownlint-cli2",
     "lint:prettier": "pnpm prettier --check .",
     "lint:scripts": "eslint",
-    "prepublishOnly": "pnpm build && publint && attw --pack",
+    "prepublishOnly": "publint && attw --pack",
     "publint": "publint",
     "test": "vitest"
   },
