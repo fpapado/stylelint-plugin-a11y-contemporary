@@ -36,7 +36,8 @@
     "lint:scripts": "eslint",
     "prepublishOnly": "publint && attw --pack",
     "publint": "publint",
-    "test": "vitest"
+    "test": "vitest",
+    "prepare": "husky"
   },
   "lint-staged": {
     "*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}": "eslint --fix",
@@ -56,6 +57,7 @@
     "@vitest/eslint-plugin": "1.1.32-beta.1",
     "dedent": "1.5.3",
     "eslint": "9.21.0",
+    "husky": "9.1.7",
     "jiti": "2.4.2",
     "lint-staged": "15.4.3",
     "markdownlint-cli2": "0.17.2",
