@@ -1,6 +1,7 @@
 # `stylelint-plugin-a11y-modern`
 
-> Stylelint plugin for better accessibility, contemporary to codebases written in 2025 and beyond.
+> Stylelint plugin for better accessibility, contemporary to codebases written
+> in 2025 and beyond.
 
 ## Usage
 
@@ -46,8 +47,16 @@ Add `stylelint-plugin-a11y-contemporary` to the plugins section of your
 
 ### What's up with the versions, like `2500.1.0`?
 
-This package uses epoch-based SemVer, with an epoch corresponding to the last two digits of the year \* 100. For example, the epoch of the year 2025 would be 25 \* 100 = 2500. Versions within an epoch are done as usual in SemVer, for example `2501.0.0` is a major, `2501.2` is a minor, and `2501.2.5` is a patch.
+This package uses epoch-based SemVer, with an epoch corresponding to the last
+two digits of the year \* 100. For example, the epoch of the year 2025 would be
+25 \* 100 = 2500. Versions within an epoch are done as usual in SemVer, for
+example `2501.0.0` is a major, `2501.2` is a minor, and `2501.2.5` is a patch.
 
-If this package ends up being used in 21XX and beyond, we have bigger problems :)
+If this package ends up being used in 21XX and beyond, we have bigger problems
+:)
 
-We use epoch versioning in order to signal what the "current" year of the recommended ruleset is. All major bumps are SemVer major bumps as usual, whether within a given epoch, or between epochs. The epochs are just an easy way to show people when the rulesets were last revisited, since accessibility guidance and browser practices change over time..
+We use epoch versioning in order to signal what the "current" year of the
+recommended ruleset is. All major bumps are SemVer major bumps as usual, whether
+within a given epoch, or between epochs. The epochs are just an easy way to show
+people when the rulesets were last revisited, since accessibility guidance and
+browser practices change over time..

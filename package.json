@@ -31,11 +31,17 @@
     "check-types:watch": "tsc --noEmit --watch",
     "format": "pnpm prettier --write .",
     "lint": "npm-run-all \"lint:*\"",
+    "lint:md": "pnpm ",
     "lint:prettier": "pnpm prettier --check .",
     "lint:scripts": "eslint",
     "prepublishOnly": "pnpm build && publint && attw --pack",
     "publint": "publint",
     "test": "vitest"
+  },
+  "lint-staged": {
+    "*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}": "eslint --fix",
+    "!(.changeset)/*.md": "markdownlint-cli2 --fix",
+    "*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
     "postcss": "^8.5.3"
@@ -51,6 +57,8 @@
     "dedent": "1.5.3",
     "eslint": "9.21.0",
     "jiti": "2.4.2",
+    "lint-staged": "15.4.3",
+    "markdownlint-cli2": "0.17.2",
     "npm-run-all2": "7.0.2",
     "prettier": "3.5.2",
     "prettier-plugin-packagejson": "2.5.8",
@@ -68,7 +76,9 @@
   "engines": {
     "node": "^20 || ^22 || ^23"
   },
-  "publishConfig": {},
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild"
