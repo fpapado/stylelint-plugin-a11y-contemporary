@@ -24,7 +24,7 @@
     "docs"
   ],
   "scripts": {
-    "build": "tsc --noCheck",
+    "build": "rm -rf dist/ && tsc --noCheck",
     "check-types": "tsc --noEmit",
     "check-types:watch": "tsc --noEmit --watch",
     "format": "pnpm prettier --write .",

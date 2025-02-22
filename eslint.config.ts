@@ -1,8 +1,8 @@
 import eslint from "@eslint/js";
-import tseslint from "typescript-eslint";
+import tseslint, { type ConfigArray } from "typescript-eslint";
 
-export default tseslint.config(
-  { ignores: ["dist"] },
+const config: ConfigArray = tseslint.config(
+  { ignores: ["dist", "prettier.config.js"] },
   eslint.configs.recommended,
   tseslint.configs.strictTypeChecked,
   {
@@ -14,3 +14,5 @@ export default tseslint.config(
     },
   },
 );
+
+export default config;

@@ -1,19 +1,19 @@
 {
   "extends": "@tsconfig/node22",
   "compilerOptions": {
-    "declaration": true,
+    "composite": true,
+    "emitDeclarationOnly": true,
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     // Unambiguous syntax
-    "verbatimModuleSyntax": true,
-
-    "outDir": "dist/"
+    "verbatimModuleSyntax": true
   },
   "include": [
-    "src/**/*",
     // Needed to take care of any type merging for tests
-    "vitest-setup.ts"
-  ],
-  "references": [{ "path": "./tsconfig.dev.json" }]
+    "vitest-setup.ts",
+    "vitest.config.ts",
+    "eslint.config.ts",
+    "prettier.config.ts"
+  ]
 }
