@@ -5,7 +5,7 @@
 
 ## Usage
 
-You'll first need to install
+You will first need to install
 [Stylelint](https://stylelint.io/user-guide/get-started):
 
 ```sh
