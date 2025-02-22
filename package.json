@@ -1,6 +1,6 @@
 {
   "name": "stylelint-plugin-a11y-contemporary",
-  "version": "2500.0.2",
+  "version": "2500.0.3",
   "description": "Stylelint plugin for better accessibility, contemporary to codebases written in 2025 and beyond.",
   "keywords": [
     "stylelint",
