@@ -1,18 +1,19 @@
 {
   "extends": "@tsconfig/node22",
   "compilerOptions": {
-    // We only use this file for type-checking
-    "noEmit": true,
+    "declaration": true,
     "module": "Node16",
     "moduleResolution": "node16",
     "allowJs": true,
     "checkJs": false,
     "resolveJsonModule": true,
     // Unambiguous syntax
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+
+    "outDir": "dist/"
   },
   "include": [
-    "src",
+    "src/**/*",
     // Needed to take care of any type merging for tests
     "vitest-setup.ts"
   ]

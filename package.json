@@ -15,19 +15,16 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "default": "./dist/index.cjs"
+      "import": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
   "files": [
     "dist",
     "docs"
   ],
   "scripts": {
-    "build": "tshy lib/index.ts",
+    "build": "tsc --noCheck",
     "check-types": "tsc --noEmit",
     "check-types:watch": "tsc --noEmit --watch",
     "format": "pnpm prettier --write .",
