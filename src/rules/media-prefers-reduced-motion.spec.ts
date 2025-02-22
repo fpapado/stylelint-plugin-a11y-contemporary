@@ -7,10 +7,7 @@ import plugin, {
 
 const plugins = [plugin];
 
-const {
-  ruleName,
-  rule: { messages },
-} = plugin as {
+const { ruleName } = plugin as {
   ruleName: string;
   rule: Rule & { messages: typeof pluginMessages };
 };
