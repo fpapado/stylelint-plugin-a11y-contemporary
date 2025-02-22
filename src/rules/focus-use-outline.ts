@@ -6,7 +6,7 @@ const {
   utils: { report, ruleMessages, validateOptions },
 } = stylelint;
 
-const ruleName = "a11y-contemporary/focus-style-use-outline";
+const ruleName = "a11y-contemporary/focus-use-outline";
 
 export const messages = ruleMessages(ruleName, {
   noBoxShadow:
@@ -28,7 +28,7 @@ function hasOutlineSibling(decl: Declaration): boolean {
   return found;
 }
 
-const ruleFunction: Rule = (primary) => {
+const ruleFunction: Rule = (primary, _secondary, context) => {
   return (root, result) => {
     const validOptions = validateOptions(result, ruleName, {
       actual: primary,

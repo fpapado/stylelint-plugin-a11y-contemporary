@@ -1,4 +1,4 @@
-# `stylelint-plugin-a11y-modern`
+# `stylelint-plugin-a11y-contemporary`
 
 > Stylelint plugin for better accessibility, contemporary to codebases written
 > in 2025 and beyond.
