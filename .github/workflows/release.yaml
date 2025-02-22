@@ -17,6 +17,7 @@ jobs:
       pull-requests: write # to create a release pull request (changesets/action)
       contents: write # to create the release itself (changesets/action)
       id-token: write # OpenID Connect token needed for npm publish provenance
+      packages: write # to publish to GitHub package registr
     name: Release
     runs-on: ubuntu-latest
     steps:
