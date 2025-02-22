@@ -43,6 +43,11 @@ Add `stylelint-plugin-a11y-contemporary` to the plugins section of your
 
 <!-- end auto-generated rules list -->
 
+## Contributing
+
+Refer to [Contributing](/CONTRIBUTING.md) for how to contribute to this project,
+including how to set up local development.
+
 ## FAQ
 
 ### What's up with the versions, like `2500.1.0`?
