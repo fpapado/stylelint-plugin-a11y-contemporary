@@ -1,19 +1,18 @@
 {
-  "extends": "@tsconfig/node22/tsconfig.json",
+  "extends": "@tsconfig/node22",
   "compilerOptions": {
-    // We only use this file for type-checking, but note that tsup will use the
-    // target to inform esbuild's emit
-    "module": "Preserve",
-    "moduleResolution": "Bundler",
+    // We only use this file for type-checking
     "noEmit": true,
-    "isolatedModules": true,
+    "module": "Node16",
+    "moduleResolution": "node16",
     "allowJs": true,
     "checkJs": false,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    // Unambiguous syntax
+    "verbatimModuleSyntax": true
   },
   "include": [
     "src",
-    "tests",
     // Needed to take care of any type merging for tests
     "vitest-setup.ts"
   ]
