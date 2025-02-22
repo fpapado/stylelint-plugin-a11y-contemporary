@@ -28,7 +28,7 @@ function hasOutlineSibling(decl: Declaration): boolean {
   return found;
 }
 
-const ruleFunction: Rule = (primary, _secondary, context) => {
+const ruleFunction: Rule = (primary) => {
   return (root, result) => {
     const validOptions = validateOptions(result, ruleName, {
       actual: primary,
