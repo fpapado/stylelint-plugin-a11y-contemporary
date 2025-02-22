@@ -1,3 +1,3 @@
-import focusStyleUseOutline from "./rules/focus-style-use-outline.js";
+import focusUseOutline from "./rules/focus-use-outline.js";
 
-export default [focusStyleUseOutline];
+export default [focusUseOutline];

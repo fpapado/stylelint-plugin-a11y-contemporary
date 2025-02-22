@@ -1,9 +1,7 @@
 import { it, expect, describe } from "vitest";
 import { getTestRule } from "vitest-stylelint-utils";
 import type { Rule } from "stylelint";
-import plugin, {
-  messages as pluginMessages,
-} from "./focus-style-use-outline.js";
+import plugin, { messages as pluginMessages } from "./focus-use-outline.js";
 
 const plugins = [plugin];
 

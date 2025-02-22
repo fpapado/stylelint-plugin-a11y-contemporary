@@ -27,7 +27,7 @@ Add `stylelint-plugin-a11y-contemporary` to the plugins section of your
 {
   "plugins": ["stylelint-plugin-a11y-contemporary"],
   "rules": {
-    "a11y-contemporary/media-prefers-reduced-motion": true
+    "a11y-contemporary/focus-use-outline": true
   }
 }
 ```
@@ -37,9 +37,9 @@ Add `stylelint-plugin-a11y-contemporary` to the plugins section of your
 💼 Configurations enabled in.\
 ✅ Set in the `recommended` configuration.
 
-| Name                                                                       | Description                                                                                     | 💼  |
-| :------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------- | :-- |
-| [media-prefers-reduced-motion](docs/rules/media-prefers-reduced-motion.md) | Ensures that all animations and transitions are wrapped in a prefers-reduced-motion media query | ✅  |
+| Name                                                 | Description                                                                                                       | 💼  |
+| :--------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------- | :-- |
+| [focus-use-outline](docs/rules/focus-use-outline.md) | Ensures that all `:focus`, `:focus-visible` and `:focus-within` selectors style `outline` instead of `box-shadow` | ✅  |
 
 <!-- end auto-generated rules list -->
 
