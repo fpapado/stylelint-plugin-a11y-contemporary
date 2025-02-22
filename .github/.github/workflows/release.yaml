@@ -1,0 +1,48 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions: {}
+
+jobs:
+  release:
+    # do not run on forks
+    if: github.repository == 'fpapado/stylelint-plugin-a11y-contemporary'
+    permissions:
+      pull-requests: write # to create a release pull request (changesets/action)
+      contents: write # to create the release itself (changesets/action)
+      id-token: write # OpenID Connect token needed for npm publish provenance
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          # This makes Actions fetch all Git history so that Changesets can
+          # generate changelogs with the correct commits
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4
+        with:
+          node-version-file: ".nvmrc"
+      - run: pnpm install
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          # Calls out to `changeset version`, and also updates the lockfile
+          version: pnpm changeset:version
+          # Use a recursive pnpm script under the hood, to ensure that
+          # publishing runs topologically. Changesets does not do this out of
+          # the box. @see: https://github.com/changesets/changesets/issues/238
+          publish: pnpm changeset:release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
+          # set as a repository secret
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

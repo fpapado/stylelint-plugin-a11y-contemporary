@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches:
+      - "**"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read # for actions/checkout
+
+jobs:
+  checks:
+    name: Checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Setup node
+        uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4
+        with:
+          node-version-file: ".nvmrc"
+      - run: pnpm install
+        id: install
+      - name: Build
+        run: pnpm build
+      - name: Check types
+        if: steps.install.conclusion == 'success' && !cancelled()
+        run: pnpm check-types
+      - name: Lint
+        if: steps.install.conclusion == 'success' && !cancelled()
+        run: pnpm lint
+      - name: Test
+        if: steps.install.conclusion == 'success' && !cancelled()
+        run: pnpm test
