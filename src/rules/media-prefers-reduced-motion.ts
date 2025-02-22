@@ -16,7 +16,7 @@ const meta = {
 };
 
 const ruleFunction: Rule = (primary) => {
-  return (root, result) => {
+  return (_root, result) => {
     const validOptions = validateOptions(result, ruleName, {
       actual: primary,
       possible: [true],

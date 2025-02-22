@@ -21,6 +21,9 @@ importers:
       '@tsconfig/node22':
         specifier: 22.0.0
         version: 22.0.0
+      '@tsconfig/strictest':
+        specifier: 2.0.5
+        version: 2.0.5
       '@types/node':
         specifier: 22.13.5
         version: 22.13.5
@@ -450,6 +453,9 @@ packages:
 
   '@tsconfig/node22@22.0.0':
     resolution: {integrity: sha512-twLQ77zevtxobBOD4ToAtVmuYrpeYUh3qh+TEp+08IWhpsrIflVHqQ1F1CiPxQGL7doCdBIOOCF+1Tm833faNg==}
+
+  '@tsconfig/strictest@2.0.5':
+    resolution: {integrity: sha512-ec4tjL2Rr0pkZ5hww65c+EEPYwxOi4Ryv+0MtjeaSQRJyq322Q27eOQiFbuNgw2hpL4hB1/W/HBGk3VKS43osg==}
 
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
@@ -1860,6 +1866,8 @@ snapshots:
   '@sindresorhus/is@4.6.0': {}
 
   '@tsconfig/node22@22.0.0': {}
+
+  '@tsconfig/strictest@2.0.5': {}
 
   '@types/estree@1.0.6': {}
 

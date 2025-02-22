@@ -19,12 +19,11 @@ const meta = {
 
 function hasOutlineSibling(decl: Declaration): boolean {
   let found = false;
-  decl.parent?.walkDecls((decl) => {
-    if (decl.prop === "outline") {
-      found = true;
-      // stop walking
-      return false;
-    }
+  decl.parent?.walkDecls("outline", (_decl) => {
+    found = true;
+
+    // stop walking
+    return false;
   });
   return found;
 }

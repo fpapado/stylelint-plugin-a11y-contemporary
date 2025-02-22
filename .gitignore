@@ -1,3 +1,5 @@
 dist/
 node_modules/
 *.tsbuildinfo
+vitest.config.d.ts
+eslint.config.d.ts
