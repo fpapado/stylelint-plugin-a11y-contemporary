@@ -1,5 +1,5 @@
 import stylelint, { type Rule } from "stylelint";
-import { type Declaration } from "postcss";
+import { Declaration } from "postcss";
 
 const {
   createPlugin,
@@ -10,7 +10,7 @@ const ruleName = "a11y-contemporary/focus-use-outline";
 
 export const messages = ruleMessages(ruleName, {
   noBoxShadow:
-    "Use outline instead of box-shadow. Outline follows borders as well, but can be inset and offset with outline-offset. box-shadow disappears in forced colors mode.",
+    "Use outline instead of box-shadow. Outline follows borders as well, and can be inset and offset with outline-offset. box-shadow disappears in forced colors mode.",
 });
 
 const meta = {
@@ -19,7 +19,7 @@ const meta = {
 };
 
 // @see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Values_and_Units/CSS_data_types#css-wide_keywords
-const cssKeywords = new Set([
+const CSS_KEYWORDS = new Set([
   "auto",
   "initial",
   "inherit",
@@ -28,20 +28,33 @@ const cssKeywords = new Set([
   "unset",
 ]);
 
-const noneValue = "none";
+const NONE = "none";
 
-function hasOutlineSibling(decl: Declaration): boolean {
+/**
+ * Returns whether a declaration has an outline sibling delcaration, that is not a reset.
+ */
+function hasOutlineSiblingOtherThanNone(decl: Declaration): boolean {
   let found = false;
-  decl.parent?.walkDecls("outline", (_decl) => {
-    found = true;
+  decl.parent?.walkDecls("outline", (outlineDecl) => {
+    if (outlineDecl.value !== NONE) {
+      found = true;
 
-    // stop walking
-    return false;
+      // stop walking
+      return false;
+    }
+    return undefined;
   });
   return found;
 }
 
-const ruleFunction: Rule = (primary) => {
+/**
+ * Matches box-shadow of the type: inset? 0 0 0 4px red. Does not account for
+ * other cases.
+ */
+const simpleBoxShadowRe =
+  /(?<inset>inset)? 0[a-zA-Z]* 0[a-zA-Z]* 0[a-zA-Z]* (?<width>[0-9][a-zA-Z]*) (?<color>.*)/;
+
+const ruleFunction: Rule = (primary, secondary) => {
   return (root, result) => {
     const validOptions = validateOptions(result, ruleName, {
       actual: primary,
@@ -52,17 +65,60 @@ const ruleFunction: Rule = (primary) => {
       return;
     }
 
+    const additionalSelectors =
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      (secondary?.additionalSelectors as string[] | undefined) ?? [];
+
     root.walkRules((rule) => {
-      if (rule.selector.includes(":focus")) {
+      if (
+        rule.selector.includes(":focus") ||
+        additionalSelectors.some((selector) => rule.selector.includes(selector))
+      ) {
         rule.walkDecls((decl) => {
           if (
             decl.prop === "box-shadow" &&
-            decl.value !== noneValue &&
-            !cssKeywords.has(decl.value) &&
-            !hasOutlineSibling(decl)
+            decl.value !== NONE &&
+            !CSS_KEYWORDS.has(decl.value) &&
+            // outline other than none could be a valid configuration, e.g.
+            // setting both an outline and a shadow, or setting a transparent
+            // outline
+            !hasOutlineSiblingOtherThanNone(decl)
           ) {
             const fix = () => {
-              // TODO: parse box-shadow for the fix
+              // We do fixes on a best-effort basis, based on a regex. This will
+              // not account for everything, just cases we consider unambiguous.
+              const res = simpleBoxShadowRe.exec(decl.toString());
+
+              if (!res) {
+                return undefined;
+              }
+
+              const { inset, width, color } = res.groups as {
+                inset?: "inset";
+                width: string;
+                color: string;
+              };
+
+              const newDecl = new Declaration({
+                prop: "outline",
+                value: `${width} solid ${color}`,
+              });
+
+              decl.replaceWith(newDecl);
+
+              if (inset !== undefined) {
+                newDecl.after({
+                  prop: "outline-offset",
+                  value: `calc(-1 * ${width})`,
+                });
+              }
+
+              // Wipe any outline: none
+              newDecl.parent?.walkDecls("outline", (decl) => {
+                if (decl.value === NONE) {
+                  decl.remove();
+                }
+              });
             };
 
             report({
