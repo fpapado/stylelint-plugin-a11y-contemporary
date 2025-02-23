@@ -1,5 +1,17 @@
 # stylelint-plugin-a11y-contemporary
 
+## 2500.1.0
+
+### Minor Changes
+
+- 075c10f: Add `additionalSelectors` secondary option, to allow specifying any
+  custom selectors that should be targeted, in addition to the built-in
+  :focus/:focus-visible/:focus-within.
+
+### Patch Changes
+
+- 075c10f: Ensure that autofix also removes `outline: none` declarations
+
 ## 2500.0.3
 
 ### Patch Changes
