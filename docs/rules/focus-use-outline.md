@@ -1,6 +1,6 @@
 # focus-use-outline
 
-Encourages use of `outline` for styling focus indicators, over `box-shadow`.
+Encourages the use of `outline` for styling focus indicators, over `box-shadow`.
 
 Reasoning:
 
@@ -27,6 +27,10 @@ The following patterns are considered problems:
 :focus-within {
   box-shadow: 0 0 0 3px red;
 }
+:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px red;
+}
 ```
 
 The following patterns are _not_ considered problems:
@@ -41,11 +45,36 @@ The following patterns are _not_ considered problems:
 :focus-within {
   outline: 3px solid blue;
 }
+
+/* box-shadow can co-exist with outline, if the outline is not reset fully */
 :focus {
   outline: 3px solid blue;
-
-  /* Any box-shadow can co-exist with outline */
   box-shadow: 0 0 0 3px red;
+}
+```
+
+## Secondary options
+
+### `additionalSelectors`
+
+By default, this rule considers any selector that includes `:focus`,
+`:focus-visible` and `:focus-within` to be a focus-related style.
+
+Sometimes, depending on polyfills, browser bug workarounds, or code
+organisation, you might be using additional selectors to indicate focus-related
+styles, such as `.focus-visible`.
+
+You can provide `additionalSelectors`, to allow the plugin to target those
+rules.
+
+```json
+{
+  "rules": {
+    "a11y-contemporary/focus-use-outline": [
+      true,
+      { "additionalSelectors": [".focus-visible"] }
+    ]
+  }
 }
 ```
 
@@ -61,3 +90,7 @@ to create a focus indicator that is visible on multiple backgrounds. If you are
 doing this, you can still use this rule, and set an outline like
 `outline: 2px solid transparent`, so that you preserve forced-colors mode
 compatibility.
+
+```
+
+```

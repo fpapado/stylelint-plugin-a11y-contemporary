@@ -45,7 +45,8 @@
     "*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
-    "postcss": "^8.5.3"
+    "postcss": "^8.5.3",
+    "postcss-values-parser": "^6.0.2"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.17.4",
