@@ -15,6 +15,7 @@ const {
 
 const testRule = getTestRule({ plugins, it, expect, describe });
 
+// Default config
 testRule({
   plugins,
   ruleName,
@@ -112,6 +113,31 @@ testRule({
     },
     {
       code: ".focus-visible { box-shadow: 0 0 0 2px blue; }",
+      message: messages.noBoxShadow,
+    },
+  ],
+});
+
+// Standalone box-shadow
+testRule({
+  plugins,
+  ruleName,
+  config: [true, { allowStandaloneBoxShadow: true }],
+  accept: [
+    {
+      // Standalone box-shadow is OK here
+      code: ":focus { box-shadow: 0 2px 0 2px rgba(0, 0, 0, 0.52); }",
+    },
+    {
+      // Any accompanied box-shadow is still ok
+      code: ":focus { outline: 2px solid red; box-shadow: 0 2px 0 2px rgba(0, 0, 0, 0.52); }",
+    },
+  ],
+  reject: [
+    {
+      // If an outline is reset altogether, then box-shadow is still disallowed
+      code: ":focus { outline: none; box-shadow: 0 0 0 2px red; }",
+      fixed: ":focus { outline: 2px solid red; }",
       message: messages.noBoxShadow,
     },
   ],

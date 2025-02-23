@@ -48,6 +48,23 @@ function hasOutlineSiblingOtherThanNone(decl: Declaration): boolean {
 }
 
 /**
+ * Returns whether a declaration has an outline reset sibling declaration.
+ */
+function hasOutlineSiblingNone(decl: Declaration): boolean {
+  let found = false;
+  decl.parent?.walkDecls("outline", (outlineDecl) => {
+    if (outlineDecl.value === NONE) {
+      found = true;
+
+      // stop walking
+      return false;
+    }
+    return undefined;
+  });
+  return found;
+}
+
+/**
  * Matches box-shadow of the type: inset? 0 0 0 4px red. Does not account for
  * other cases.
  */
@@ -69,6 +86,10 @@ const ruleFunction: Rule = (primary, secondary) => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       (secondary?.additionalSelectors as string[] | undefined) ?? [];
 
+    const allowStandaloneBoxShadow =
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      secondary?.allowStandaloneBoxShadow === true;
+
     root.walkRules((rule) => {
       if (
         rule.selector.includes(":focus") ||
@@ -79,10 +100,13 @@ const ruleFunction: Rule = (primary, secondary) => {
             decl.prop === "box-shadow" &&
             decl.value !== NONE &&
             !CSS_KEYWORDS.has(decl.value) &&
-            // outline other than none could be a valid configuration, e.g.
-            // setting both an outline and a shadow, or setting a transparent
-            // outline
-            !hasOutlineSiblingOtherThanNone(decl)
+            (allowStandaloneBoxShadow
+              ? // In the standalone codepath, only an outline reset sibling
+                // marks this as invalid
+                hasOutlineSiblingNone(decl)
+              : // In the accompanied codepath, a lack of an outline sibling,
+                // plus any outline reset, marks this as invalid
+                !hasOutlineSiblingOtherThanNone(decl))
           ) {
             const fix = () => {
               // We do fixes on a best-effort basis, based on a regex. This will
